@@ -13,7 +13,7 @@ int main()
 		scanf("%f",&score[i]);
 	}
 	a=Not (score,n);
-	printf("不及格的人数为：%d\n",a);
+	printf("虏禄录掳赂帽碌脛脠脣脢媒脦陋拢潞%d\n",a);
 	Datescore(score,n);
 	for (i=0;i<n;i++)
 	{
