@@ -7,19 +7,19 @@ int main ()
 	while (1){
 	
 		float a,b,c;
-		printf("ÇëÊäÈëÈý½ÇÐÎµÄÈý±ß³¤£º");
+		printf("è¯·è¾“å…¥ä¸‰è§’å½¢çš„ä¸‰è¾¹é•¿ï¼š");
 		scanf("%f%f%f",&a,&b,&c) ;
 		if (a+b>c&&a+c>b&&b+c>a)
 			{
 				if(fabs(a*a+b*b-c*c)<=EPS||fabs(a*a+c*c-b*b)<=EPS||fabs(b*b+c*c-a*a)<=EPS)
-					printf("Èý½ÇÐÎÎªÖ±½ÇÈý½ÇÐÎ\n");
+					printf("ä¸‰è§’å½¢ä¸ºç›´è§’ä¸‰è§’å½¢\n");
 				else if (fabs(a-b)<=EPS||fabs(a-c)<=EPS||fabs(b-c)<=EPS)
-					printf("Èý½ÇÐÎÎªµÈÑüÈý½ÇÐÎ\n");
+					printf("ä¸‰è§’å½¢ä¸ºç­‰è…°ä¸‰è§’å½¢\n");
 				else 
-					printf("Èý½ÇÐÎÎªÒ»°ãÈý½ÇÐÎ\n");
+					printf("ä¸‰è§’å½¢ä¸ºä¸€èˆ¬ä¸‰è§’å½¢\n");
 			}
 		else 
-			printf("²»¹¹³ÉÈý½ÇÐÎ\n"); 
+			printf("ä¸æž„æˆä¸‰è§’å½¢\n"); 
 		getch ();
 	}
 	return 0; 
