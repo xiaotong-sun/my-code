@@ -9,14 +9,14 @@ int main()
 	float score[40];
 	int n, i, a;
 	printf("please input the number of the students(n<=40):");
-	scanf("%d",&n);
+	scanf("%d", &n);
 	printf("please input the score of the students:\n");
 	for (i=0; i<n; i++)
 	{
-		scanf("%f",&score[i]);
+		scanf("%f", &score[i]);
 	}
 	a = get_failed_student_count(score, n);
-	printf("不及格的人数为：%d\n", a);
+	printf("the number of the students who fail is %d\n", a);
 	put_score_in_order(score, n);
 	for (i=0; i<n; i++)
 	{
