@@ -1,62 +1,67 @@
-#include <stdio.h> 
-int Not (float score[],int n);
-void Datescore(float score[],int n);
+#include <stdio.h>
+ 
+int get_failed_student_count(float score[], int n);
+void put_score_in_order(float score[], int n);
+void exchange_score(float score[], int k, int i);
+
 int main()
 {
 	float score[40];
-	int n,i,a;
+	int n, i, a;
 	printf("please input the number of the students(n<=40):");
 	scanf("%d",&n);
 	printf("please input the score of the students:\n");
-	for (i=0;i<n;i++)
+	for (i=0; i<n; i++)
 	{
 		scanf("%f",&score[i]);
 	}
-	a=Not (score,n);
-	printf("²»¼°¸ñµÄÈËÊýÎª£º%d\n",a);
-	Datescore(score,n);
-	for (i=0;i<n;i++)
+	a = get_failed_student_count(score, n);
+	printf("不及格的人数为：%d\n", a);
+	put_score_in_order(score, n);
+	for (i=0; i<n; i++)
 	{
-		printf("%.1f\n",score[i]);
+		printf("%.1f\n", score[i]);
 	}
 	return 0;
 } 
-int Not (float score[],int n)
+
+int get_failed_student_count(float score[], int n)
 {
-	int i,k=0;
-	for (i=0;i<n;i++)
+	int i, failed_student_count=0;
+	for (i=0; i<n; i++)
 	{
-		if (score[i]<60)
+		if (score[i] < 60)
 		{
-			k+=1;
+			failed_student_count += 1;
 		}
 	}
-	return k;
+	return failed_student_count;
 }
-void Datescore(float score[],int n)
+
+void put_score_in_order(float score[], int n)
 {
-	int j,i,k,temp;
-	for (i=0;i<n-1;i++)
+	int k;
+	for (int i=0; i<n-1; i++)
 	{
-		k=i;
-		for (j=i+1;j<n;j++)
+		k = i;
+		for (int j=i+1; j<n; j++)
 		{
-			if (score[k]<score[j])
+			if (score[k] < score[j])
 			{
-				k=j;
+				k = j;
 			}
 		}
-		if (k!=i)
+		if (k != i)
 		{
-			temp=score[k];
-			score[k]=score[i];
-			score[i]=temp;
+			exchange_score(score, k, i);
 		}
 	}
 }
 
-
-
-
-
-
+void exchange_score(float score[], int k, int i)
+{
+	int temp;
+	temp = score[k];
+	score[k] = score[i];
+	score[i] = temp;
+}
