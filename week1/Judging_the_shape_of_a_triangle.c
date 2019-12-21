@@ -15,8 +15,7 @@ int main()
 			|| fabs(a * a + c * c - b * b) <= EPS
 			|| fabs(b * b + c * c - a * a) <= EPS) {
 				printf("三角形为直角三角形\n");
-			}
-			else if (fabs(a - b) <= EPS
+			} else if (fabs(a - b) <= EPS
 		      	      || fabs(a - c) <= EPS
 		              || fabs(b - c) <= EPS) {
 				printf("三角形为等腰三角形\n");
