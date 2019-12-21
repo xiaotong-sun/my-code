@@ -26,7 +26,7 @@ int main()
 		} else {
 			printf("不构成三角形\n"); 
 		}
-	getch();
+		getch();
 	}
 	return 0; 
 }
