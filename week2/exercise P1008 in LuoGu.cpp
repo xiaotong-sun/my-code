@@ -24,7 +24,8 @@ int main()
 						|| num3 >= 1000) {
 							continue;
 						} else {
-							printf("%d %d %d\n", num1, num2, num3); // Output everything in ascending order.
+                                                        // Output everything in ascending order.
+							printf("%d %d %d\n", num1, num2, num3);
 						}
 					}
 				}
