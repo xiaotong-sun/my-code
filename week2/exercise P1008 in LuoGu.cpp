@@ -31,14 +31,14 @@ int main()
 		}
 	}
 	return 0;
-} 
+}
 
 int is_valid_hundreds_digit(int num)
 {
 	if (is_hundreds(num) && has_different_digits(num)) {
 		return 1;
 	}
-	 return 0;
+	return 0;
 }
 
 int is_hundreds(int num)
