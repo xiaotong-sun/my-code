@@ -31,30 +31,30 @@ int main()
 		}
 	}
 	return 0;
- } 
- 
- int is_valid_hundreds_digit(int num)
- {
- 	if (is_hundreds(num) && has_different_digits(num)) {
- 		return 1;
+} 
+
+int is_valid_hundreds_digit(int num)
+{
+	if (is_hundreds(num) && has_different_digits(num)) {
+		return 1;
+	}
+	 return 0;
+}
+
+int is_hundreds(int num)
+{
+	if (num < 1000) {
+		return 1;
 	}
 	return 0;
- }
+}
  
- int is_hundreds(int num)
- {
- 	if (num < 1000) {
- 		return 1;
-	}
-	return 0;
- }
- 
- int has_different_digits(int num)
- {
- 	if (num % 10 != num / 10 % 10
+int has_different_digits(int num)
+{
+	if (num % 10 != num / 10 % 10
 		&& num % 10 != num / 100
 		&& num / 10 % 10 != num / 100) {
 		return 1;
 	}
 	return 0;
- }
+}
