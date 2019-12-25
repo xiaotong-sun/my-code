@@ -114,6 +114,7 @@ void rank_by_student_number_in_ascending_order(int n, long student_number[], int
 		}
 	}
 }
+
 int search_student_rank_and_grade_by_student_number(int n, long student_number[], int score[]) {
 	long num;
 	rank_by_grade_in_descending_order(n, student_number, score);
@@ -136,17 +137,13 @@ void count_the_percentage_of_the_each_category(int n, long student_number[], int
 	for (int i = 0; i < n; i++) {
 		if (score[i] <= 100 && score[i] >= 90) {
 			excellent++;
-		}
-		else if (score[i] < 90 && score[i] >= 80) {
+		} else if (score[i] < 90 && score[i] >= 80) {
 			good++;
-		}
-		else if (score[i] < 80 && score[i] >= 70) {
+		} else if (score[i] < 80 && score[i] >= 70) {
 			medium++;
-		}
-		else if (score[i] < 70 && score[i] >= 60) {
+		} else if (score[i] < 70 && score[i] >= 60) {
 			pass++;
-		}
-		else if (score[i] < 60) {
+		} else {
 			fail++;
 		}
 	}
