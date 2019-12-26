@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 void readscore(int n, long student_number[], int score[]);
-void print_total_and_average(int n, int score[]);
+void print_total_and_average(int score[], int n);
 void rank_by_grade_in_descending_order(int n, long student_number[], int score[]);
 void print_score(int n, long student_number[], int score[]);
 void rank_by_student_number_in_ascending_order(int n, long student_number[], int score[]);
