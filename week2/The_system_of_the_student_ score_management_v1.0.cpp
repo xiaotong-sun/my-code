@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-void readscore(long student_ID[], int score[], int n);
+void input_score(long student_ID[], int score[], int n);
 void print_total_and_average(int n, int score[]);
 void rank_by_grade_in_descending_order(long student_ID[], int score[], int n);
 void print_score(long student_ID[], int score[], int n);
@@ -12,26 +12,23 @@ int main()
 {
 	long student_ID[30];
 	int score[30], n, choice;
-	printf("1.Input record\n");
-	printf("2.Caculate total and average score of course\n");
-	printf("3.Sort in descending order by score\n");
-	printf("4.Sort in ascending order by number\n");
-	printf("5.search by number\n");
-	printf("6.Statistic analysis\n");
-	printf("0.Exit\n\n");
+	printf("1. Input record\n");
+	printf("2. Caculate total and average score of course\n");
+	printf("3. Sort in descending order by score\n");
+	printf("4. Sort in ascending order by number\n");
+	printf("5. search by number\n");
+	printf("6. Statistic analysis\n");
+	printf("0. Exit\n\n");
 	do {
 		printf("Please enter your choice:");
-		scanf("%d", &choice);
-		switch (choice)
-		{
+		scanf_s("%d", &choice);
+		if (choice <= 6 && choice >= 0) {
+			switch (choice)
+			{
 			case 1:
-				printf("Please input the number of the students:");
-				scanf("%d", &n);
-				if (n > 30) {
-					printf("The number is beyond\n");
-				} else {
-					readscore(student_ID, score, n);
-				}
+				printf("Please input the number of the students(n <= 30):");
+				scanf_s("%d", &n);
+				input_score(student_ID, score, n);
 				break;
 			case 2:
 				print_total_and_average(n, score);
@@ -53,16 +50,26 @@ int main()
 				count_the_percentage_of_the_each_category(student_ID, score, n);
 				break;
 			case 0:
+				printf("Exit successfully! \\*_*/");
 				break;
+			}
+		}
+		else {
+			printf("Please input a correct choice.  !!-_-!!\n");
 		}
 	} while (choice != 0);
 	return 0;
 }
 
-void readscore(long student_ID[], int score[], int n) {
-	printf("Please input the student's number and his score\n");
-	for (int i = 0; i < n; i++) {
-		scanf("%ld %d", &student_ID[i], &score[i]);
+void input_score(long student_ID[], int score[], int n) {
+	if (n > 30) {
+		printf("The number exceeds limit.\n");
+	}
+	else {
+		printf("Please input the student's number and his score\n");
+		for (int i = 0; i < n; i++) {
+			scanf_s("%ld %d", &student_ID[i], &score[i]);
+		}
 	}
 }
 
@@ -82,7 +89,7 @@ void rank_by_grade_in_descending_order(long student_ID[], int score[], int n) {
 	for (int i = 0; i < n - 1; i++) {
 		k = i;
 		for (int j = i + 1; j < n; j++) {
-			if (score[k] < score[j]){
+			if (score[k] < score[j]) {
 				k = j;
 			}
 		}
@@ -127,7 +134,7 @@ int search_student_rank_and_grade_by_student_ID(long student_ID[], int score[], 
 	long num;
 	rank_by_grade_in_descending_order(student_ID, score, n);
 	printf("please input the student number:");
-	scanf("%ld", &num);
+	scanf_s("%ld", &num);
 	for (int i = 0; i < n; i++) {
 		if (num == student_ID[i]) {
 			printf("The student's ranking is %d\n", i + 1);
