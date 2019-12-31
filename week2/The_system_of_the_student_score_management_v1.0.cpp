@@ -21,12 +21,12 @@ int main()
 	printf("0. Exit\n\n");
 	do {
 		printf("Please enter your choice:");
-		scanf_s("%d", &choice);
+		scanf("%d", &choice);
 		switch (choice)
 		{
 		case 1:
 			printf("Please input the number of the students(n <= 30):");
-			scanf_s("%d", &n);
+			scanf("%d", &n);
 			input_score(student_id, score, n);
 			break;
 		case 2:
@@ -49,7 +49,7 @@ int main()
 			count_the_percentage_of_the_each_category(student_id, score, n);
 			break;
 		case 0:
-			printf("Exit successfully! \\*_*/");
+			printf("Exit successfully! \\*_*/\n");
 			break;
 		default :
 			printf("Please input a correct choice.  !!-_-!!\n");
@@ -65,7 +65,7 @@ void input_score(long student_id[], int score[], int n) {
 	else {
 		printf("Please input the student's number and score\n");
 		for (int i = 0; i < n; i++) {
-			scanf_s("%ld %d", &student_id[i], &score[i]);
+			scanf("%ld %d", &student_id[i], &score[i]);
 		}
 	}
 }
@@ -132,7 +132,7 @@ int search_student_rank_and_grade_by_student_id(long student_id[], int score[], 
 	long num;
 	rank_by_grade_in_descending_order(student_id, score, n);
 	printf("please input the student number:");
-	scanf_s("%ld", &num);
+	scanf("%ld", &num);
 	for (int i = 0; i < n; i++) {
 		if (num == student_id[i]) {
 			printf("The student's ranking is %d\n", i + 1);
