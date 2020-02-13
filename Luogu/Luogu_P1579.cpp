@@ -10,12 +10,11 @@ int main() {
         if(is_prime(i)) {
             for(int j = 2; j < n; j ++) {
                 if(is_prime(j)) {
-                    for(int k = 2; k < n; k ++) {
-                        if(is_prime(k)) {
-                            if(i + j + k == n) {
-                                printf("%d %d %d", i, j, k);
-                                goto Flag;
-                            }
+                    int k = n - i - j;
+                    if(is_prime(k) && k != 0 && k != 1) {
+                        if(i + j + k == n) {
+                            printf("%d %d %d", i, j, k);
+                            goto Flag;
                         }
                     }
                 }
