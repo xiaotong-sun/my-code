@@ -1,23 +1,28 @@
 #include <stdio.h>
 
-void input_score(long student_id[], int score[], int n);
-void print_total_and_average(int n, int score[]);
-void rank_by_grade_in_descending_order(long student_id[], int score[], int n);
-void print_score(long student_id[], int score[], int n);
-void rank_by_student_id_in_ascending_order(long student_id[], int score[], int n);
-int search_student_rank_and_grade_by_student_id(long student_id[], int score[], int n);
-void count_the_percentage_of_the_each_category(long student_id[], int score[], int n);
+void input_score(long student_id[], long score[], int n);
+void print_total_and_average(int n, long score[]);
+void selection_sort(long student_id[], long score[],int n, int (*compare)(long a, long b));
+int rank_by_grade_in_descending_order(long a, long b);
+int rank_by_grade_in_ascending_order(long a, long b);
+void print_score(long student_id[], long score[], int n);
+void rank_by_student_id_in_ascending_order(long student_id[], long score[], int n);
+int search_student_rank_and_grade_by_student_id(long student_id[], long score[], int n);
+void count_the_percentage_of_the_each_category(long student_id[], long score[], int n);
+void swap(long *a, long *b);
 
 int main()
 {
-	long student_id[30];
-	int score[30], n, choice;
+	long student_id[30], score[30];
+	int n, choice;
 	printf("1. Input record\n");
 	printf("2. Caculate total and average score of course\n");
 	printf("3. Sort in descending order by score\n");
-	printf("4. Sort in ascending order by number\n");
-	printf("5. search by number\n");
-	printf("6. Statistic analysis\n");
+	printf("4. Sort in ascending order by score\n");
+	printf("5. Sort in ascending order by number\n");
+	printf("6. search by number\n");
+	printf("7. Statistic analysis\n");
+	printf("8. List record\n");
 	printf("0. Exit\n\n");
 	do {
 		printf("Please enter your choice:");
@@ -33,20 +38,30 @@ int main()
 			print_total_and_average(n, score);
 			break;
 		case 3:
-			rank_by_grade_in_descending_order(student_id, score, n);
+			selection_sort(student_id, score, n, rank_by_grade_in_descending_order);
 			printf("Rank by grade in descending order\n");
 			print_score(student_id, score, n);
 			break;
 		case 4:
+			selection_sort(student_id, score, n, rank_by_grade_in_ascending_order);
+			printf("Rank by grade in ascending order\n");
+			print_score(student_id, score, n);
+			break;
+		case 5:
 			rank_by_student_id_in_ascending_order(student_id, score, n);
 			printf("rank by student number in ascending order\n");
 			print_score(student_id, score, n);
 			break;
-		case 5:
+		case 6:
 			search_student_rank_and_grade_by_student_id(student_id, score, n);
 			break;
-		case 6:
+		case 7:
 			count_the_percentage_of_the_each_category(student_id, score, n);
+			break;
+		case 8:
+			rank_by_student_id_in_ascending_order(student_id, score, n);
+			print_score(student_id, score, n);
+			print_total_and_average(n, score);
 			break;
 		case 0:
 			printf("Exit successfully! \\*_*/\n");
@@ -58,7 +73,7 @@ int main()
 	return 0;
 }
 
-void input_score(long student_id[], int score[], int n) {
+void input_score(long student_id[], long score[], int n) {
 	if (n > 30) {
 		printf("The number exceeds limit.\n");
 	}
@@ -70,7 +85,7 @@ void input_score(long student_id[], int score[], int n) {
 	}
 }
 
-void print_total_and_average(int n, int score[]) {
+void print_total_and_average(int n, long score[]) {
 	int total = 0;
 	float average;
 	for (int i = 0; i < n; i++) {
@@ -81,35 +96,47 @@ void print_total_and_average(int n, int score[]) {
 	printf("\n");
 }
 
-void rank_by_grade_in_descending_order(long student_id[], int score[], int n) {
-	int temp, k;
+void selection_sort(long student_id[], long score[],int n, int (*compare)(long a, long b)) {
+	int k;
 	for (int i = 0; i < n - 1; i++) {
 		k = i;
 		for (int j = i + 1; j < n; j++) {
-			if (score[k] < score[j]) {
+			if ((*compare)(score [k], score [j])) {
 				k = j;
 			}
 		}
 		if (k != i) {
-			temp = score[i];
-			score[i] = score[k];
-			score[k] = temp;
-			temp = student_id[i];
-			student_id[i] = student_id[k];
-			student_id[k] = temp;
+			swap(&score[i], &score[k]);
+			swap(&student_id[i], &student_id[k]);
 		}
 	}
 }
 
-void print_score(long student_id[], int score[], int n) {
+void swap(long *a, long *b) {
+	long temp;
+	temp = *a;
+	*a = *b;
+	*b = temp;
+}
+
+int rank_by_grade_in_descending_order(long a, long b) {
+	return a < b;
+}
+
+int rank_by_grade_in_ascending_order(long a, long b)  {
+	return a > b;
+}
+
+void print_score(long student_id[], long score[], int n) {
+	printf("ID-NUM  \t  score\n");
 	for (int i = 0; i < n; i++) {
-		printf("%ld\t%d\n", student_id[i], score[i]);
+		printf("%ld\t%ld\n", student_id[i], score[i]);
 	}
 	printf("\n");
 }
 
-void rank_by_student_id_in_ascending_order(long student_id[], int score[], int n) {
-	int temp, k;
+void rank_by_student_id_in_ascending_order(long student_id[], long score[], int n) {
+	int k;
 	for (int i = 0; i < n - 1; i++) {
 		k = i;
 		for (int j = i + 1; j < n; j++) {
@@ -118,19 +145,15 @@ void rank_by_student_id_in_ascending_order(long student_id[], int score[], int n
 			}
 		}
 		if (k != i) {
-			temp = score[i];
-			score[i] = score[k];
-			score[k] = temp;
-			temp = student_id[i];
-			student_id[i] = student_id[k];
-			student_id[k] = temp;
+			swap(&score[i], &score[k]);
+			swap(&student_id[i], &student_id[k]);
 		}
 	}
 }
 
-int search_student_rank_and_grade_by_student_id(long student_id[], int score[], int n) {
+int search_student_rank_and_grade_by_student_id(long student_id[], long score[], int n) {
 	long num;
-	rank_by_grade_in_descending_order(student_id, score, n);
+	selection_sort(student_id, score, n, rank_by_grade_in_descending_order);
 	printf("please input the student number:");
 	scanf("%ld", &num);
 	for (int i = 0; i < n; i++) {
@@ -144,7 +167,7 @@ int search_student_rank_and_grade_by_student_id(long student_id[], int score[], 
 	return 0;
 }
 
-void count_the_percentage_of_the_each_category(long student_id[], int score[], int n) {
+void count_the_percentage_of_the_each_category(long student_id[], long score[], int n) {
 	int excellent = 0, good = 0, medium = 0, pass = 0, fail = 0;
 	float excellent_avg, good_avg, medium_avg, pass_avg, fail_avg;
 	for (int i = 0; i < n; i++) {
@@ -173,5 +196,5 @@ void count_the_percentage_of_the_each_category(long student_id[], int score[], i
 	printf("Good account for %.2f\n", good_avg);
 	printf("Medium account for %.2f\n", medium_avg);
 	printf("Pass account for %.2f\n", pass_avg);
-	printf("Fail account for %.2f\n", fail_avg);
+	printf("Fail account for %.2f\n\n", fail_avg);
 }
