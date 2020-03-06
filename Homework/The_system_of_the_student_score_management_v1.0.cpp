@@ -80,7 +80,7 @@ void input_score(long student_id[], long score[], int n) {
 	else {
 		printf("Please input the student's number and score\n");
 		for (int i = 0; i < n; i++) {
-			scanf("%ld %d", &student_id[i], &score[i]);
+			scanf("%ld %ld", &student_id[i], &score[i]);
 		}
 	}
 }
@@ -128,9 +128,9 @@ int rank_by_grade_in_ascending_order(long a, long b)  {
 }
 
 void print_score(long student_id[], long score[], int n) {
-	printf("ID-NUM  \t  score\n");
+	printf("ID-NUM \t score\n");
 	for (int i = 0; i < n; i++) {
-		printf("%ld\t%ld\n", student_id[i], score[i]);
+		printf("%ld \t %ld\n", student_id[i], score[i]);
 	}
 	printf("\n");
 }
@@ -159,7 +159,7 @@ int search_student_rank_and_grade_by_student_id(long student_id[], long score[],
 	for (int i = 0; i < n; i++) {
 		if (num == student_id[i]) {
 			printf("The student's ranking is %d\n", i + 1);
-			printf("The student's score is %d\n\n", score[i]);
+			printf("The student's score is %ld\n\n", score[i]);
 			return 0;
 		}
 	}
