@@ -92,10 +92,9 @@ void input_record(long student_id[], char name[][20], long score[], int n) {
 		printf("The number exceeds limit.\n");
 	}
 	else {
-		printf("Please input the student's number and score\n");
+		printf("Please input the student's number, name and score\n");
 		for (int i = 0; i < n; i++) {
-			gets(name[i]);
-			scanf("%ld %ld", &student_id[i], &score[i]);
+			scanf("%ld %s %ld", &student_id[i], name[i], &score[i]);
 		}
 	}
 }
@@ -147,7 +146,7 @@ int rank_by_grade_in_ascending_order(long a, long b)  {
 }
 
 void print_score(long student_id[], char name[][20], long score[], int n) {
-	printf("ID-NUM \t Student-name\tscore\n");
+	printf("ID-number\tStudent-name\tScore\n");
 	for (int i = 0; i < n; i++) {
 		printf("%ld \t%s\t%ld\n", student_id[i], name[i], score[i]);
 	}
