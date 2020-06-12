@@ -13,8 +13,10 @@ typedef struct record
 
 void menu();
 void input_record(RECORD data[], char subject[][20], int n, int m);
-void print_total_and_average_of_each_subject(int n, int m, char subject[][20], RECORD data[], long total[], float average[]);
-void print_total_and_average_of_each_student(int n, int m, RECORD data[]);
+void calculate_of_subject(int n, int m, RECORD data[], long total[], float average[]);
+void calculate_of_student(int n, int m, RECORD data[]);
+void print_total_and_average_of_each_subject(int m, char subject[][20], long total[], float average[]);
+void print_total_and_average_of_each_student(int n, RECORD data[]);
 void selection_sort(RECORD data[], int n, int m, int (*compare)(long a, long b));
 int rank_by_grade_in_descending_order(long a, long b);
 int rank_by_grade_in_ascending_order(long a, long b);
@@ -46,12 +48,14 @@ int main()
 			printf("Please input the number of the subject (m <= 6):");
 			scanf("%d", &m);
 			input_record(data, subject, n, m);
+			calculate_of_student(n, m, data);
+			calculate_of_subject(n, m, data, total1, average1);
 			break;
 		case 2:
-			print_total_and_average_of_each_subject(n, m, subject, data, total1, average1);
+			print_total_and_average_of_each_subject(m, subject, total1, average1);
 			break;
 		case 3:
-			print_total_and_average_of_each_student(n, m, data);
+			print_total_and_average_of_each_student(n, data);
 			break;
 		case 4:
 			selection_sort(data, n, m, rank_by_grade_in_descending_order);
@@ -85,8 +89,8 @@ int main()
 		case 11:
 			rank_by_student_id_in_ascending_order(data, n, m);
 			print_score(data, subject, n, m);
-			print_total_and_average_of_each_student(n, m, data);
-			print_total_and_average_of_each_subject(n, m, subject, data, total1, average1);
+			print_total_and_average_of_each_student(n, data);
+			print_total_and_average_of_each_subject(m, subject, total1, average1);
 			break;
 		case 12:
 			rank_by_student_id_in_ascending_order(data, n, m);
@@ -94,6 +98,8 @@ int main()
 			break;
 		case 13:
 			ReadfromFile(data, subject, &n, &m);
+			calculate_of_student(n, m, data);
+			calculate_of_subject(n, m, data, total1, average1);
 			break;
 		case 0:
 			printf("Exit successfully! \\*_*/\n");
@@ -145,8 +151,8 @@ void input_record(RECORD data[], char subject[][20], int n, int m) {
 	}
 }
 
-/*输出各科的总成绩以及平均分*/
-void print_total_and_average_of_each_subject(int n, int m, char subject[][20], RECORD data[], long total[], float average[]) {
+/* 计算各科的总成绩以及平均分*/
+void calculate_of_subject(int n, int m, RECORD data[], long total[], float average[]) {
 	for(int i = 0; i < m; i ++) {
 		total[i] = 0;
 		average[i] = 0;
@@ -157,14 +163,18 @@ void print_total_and_average_of_each_subject(int n, int m, char subject[][20], R
 		}
 		average[i] = total[i] / (float)n;
 	}
+}
+
+/*输出各科的总成绩以及平均分*/
+void print_total_and_average_of_each_subject(int m, char subject[][20], long total[], float average[]) {
 	for (int i = 0; i < m; i++) {
 	printf("%s: total = %d\taverage = %.2f\n", subject[i], total[i], average[i]);	
 	}
 	printf("\n");
 }
 
-/*输出学生的总成绩和平均分*/
-void print_total_and_average_of_each_student(int n, int m, RECORD data[]) {
+/*计算学生的总成绩以及平均分*/
+void calculate_of_student(int n, int m, RECORD data[]) {
 	for(int i = 0; i < n; i ++) {
 		data[i].total2 = 0;
 		data[i].average2 = 0;
@@ -175,6 +185,10 @@ void print_total_and_average_of_each_student(int n, int m, RECORD data[]) {
 		}
 		data[i].average2 = data[i].total2 / (float)m;
 	}
+}
+
+/*输出学生的总成绩和平均分*/
+void print_total_and_average_of_each_student(int n, RECORD data[]) {
 	for (int i = 0; i < n; i++) {
 	printf("%s: total = %d\taverage = %.2f\n", data[i].name, data[i].total2, data[i].average2);
 	}
