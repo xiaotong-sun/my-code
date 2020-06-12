@@ -231,9 +231,9 @@ void print_score(RECORD data[], char subject[][20], int n, int m) {
 	printf("total\t");
 	printf("\n");
 	for (int i = 0; i < n; i++) {
-		printf("%ld\t%-12s\t", data[i].student_id, data[i].name);
+		printf("%-10ld\t%-12s\t", data[i].student_id, data[i].name);
 		for (int j = 0; j < m; j++) {
-			printf("%ld\t", data[i].score[j]);
+			printf("%-4ld\t", data[i].score[j]);
 		}
 		printf("%d\t", data[i].total2);
 		printf("\n");
