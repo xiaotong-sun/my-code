@@ -11,6 +11,13 @@ typedef struct record
 	float average2 = 0;
 }RECORD;
 
+RECORD data[30];
+char subject[6][20];
+int n, m, choice;
+long total1[30] = {0};                           // total1 and average1 are for each subject
+float average1[30] = {0};                    // total2 and average2 are for each student
+int flag = 0;
+
 void menu();
 void input_record(RECORD data[], char subject[][20], int n, int m);
 void calculate_of_subject(int n, int m, RECORD data[], long total[], float average[]);
@@ -31,15 +38,11 @@ void ReadfromFile(RECORD data[], char subject[][20], int *n, int *m);
 
 int main()
 {
-	RECORD data[30];
-	char subject[6][20];
-	int n, m, choice;
-	long total1[30] = {0};                           // total1 and average1 are for each subject
-	float average1[30] = {0};                    // total2 and average2 are for each student
-	menu();
+		menu();
 	do {
 		printf("Please enter your choice:");
 		scanf("%d", &choice);
+		printf("\n");
 		switch (choice)
 		{
 		case 1:
@@ -50,62 +53,108 @@ int main()
 			input_record(data, subject, n, m);
 			calculate_of_student(n, m, data);
 			calculate_of_subject(n, m, data, total1, average1);
+			flag = 1;
 			break;
 		case 2:
-			print_total_and_average_of_each_subject(m, subject, total1, average1);
+			if(flag == 1) {
+				print_total_and_average_of_each_subject(m, subject, total1, average1);
+			} else {
+				printf("Please input data with choice 1 or 13\n\n");
+			}
 			break;
 		case 3:
-			print_total_and_average_of_each_student(n, data);
+			if(flag == 1) {
+				print_total_and_average_of_each_student(n, data);
+			} else {
+				printf("Please input data with choice 1 or 13\n\n");
+			}
 			break;
 		case 4:
-			selection_sort(data, n, m, rank_by_grade_in_descending_order);
-			printf("Rank by grade in descending order\n");
-			print_score(data, subject, n, m);
+			if(flag == 1) {
+				selection_sort(data, n, m, rank_by_grade_in_descending_order);
+				printf("Rank by grade in descending order\n\n");
+				print_score(data, subject, n, m);
+			} else {
+				printf("Please input data with choice 1 or 13\n\n");
+			}
 			break;
 		case 5:
-			selection_sort(data, n, m, rank_by_grade_in_ascending_order);
-			printf("Rank by grade in ascending order\n");
-			print_score(data, subject, n, m);
+			if(flag == 1) {
+				selection_sort(data, n, m, rank_by_grade_in_ascending_order);
+				printf("Rank by grade in ascending order\n\n");
+				print_score(data, subject, n, m);
+			} else {
+				printf("Please input data with choice 1 or 13\n\n");
+			}
 			break;
 		case 6:
-			rank_by_student_id_in_ascending_order(data, n, m);
-			printf("rank by student number in ascending order\n");
-			print_score(data, subject, n, m);
+			if(flag == 1) {
+				rank_by_student_id_in_ascending_order(data, n, m);
+				printf("rank by student number in ascending order\n\n");
+				print_score(data, subject, n, m);
+			} else {
+				printf("Please input data with choice 1 or 13\n\n");
+			}
 			break;
 		case 7:
-			rank_by_student_name(data, n, m);
-			printf("rank by student name\n");
-			print_score(data, subject, n, m);
+			if(flag == 1) {
+				rank_by_student_name(data, n, m);
+				printf("rank by student name\n\n");
+				print_score(data, subject, n, m);
+			} else {
+				printf("Please input data with choice 1 or 13\n\n");
+			}
 			break;
 		case 8:
-			search_student_rank_and_grade_by_student_id(data, subject, n, m);
+			if (flag == 1) {
+				search_student_rank_and_grade_by_student_id(data, subject, n, m);
+			} else {
+				printf("Please input data with choice 1 or 13\n\n");
+			}
 			break;
 		case 9:
-			search_student_rank_and_grade_by_student_name(data, subject, n, m);
+			if(flag == 1) {
+				search_student_rank_and_grade_by_student_name(data, subject, n, m);
+			} else {
+				printf("Please input data with choice 1 or 13\n\n");
+			}
 			break;
 		case 10:
-			count_the_percentage_of_the_each_category(data, subject, n, m);
+			if(flag == 1) {
+				count_the_percentage_of_the_each_category(data, subject, n, m);
+			} else {
+				printf("Please input data with choice 1 or 13\n\n");
+			}
 			break;
 		case 11:
-			rank_by_student_id_in_ascending_order(data, n, m);
-			print_score(data, subject, n, m);
-			print_total_and_average_of_each_student(n, data);
-			print_total_and_average_of_each_subject(m, subject, total1, average1);
+			if(flag == 1) {
+				rank_by_student_id_in_ascending_order(data, n, m);
+				print_score(data, subject, n, m);
+				print_total_and_average_of_each_student(n, data);
+				print_total_and_average_of_each_subject(m, subject, total1, average1);
+			} else {
+				printf("Please input data with choice 1 or 13\n\n");
+			}
 			break;
 		case 12:
+		if(flag == 1) {
 			rank_by_student_id_in_ascending_order(data, n, m);
 			WritetoFile(data, subject, n, m);
+		} else {
+			printf("Please input data with choice 1 or 13\n\n");
+		}	
 			break;
 		case 13:
 			ReadfromFile(data, subject, &n, &m);
 			calculate_of_student(n, m, data);
 			calculate_of_subject(n, m, data, total1, average1);
+			flag = 1;
 			break;
 		case 0:
 			printf("Exit successfully! \\*_*/\n");
 			break;
 		default:
-			printf("Please input a correct choice.  !!-_-!!\n");
+			printf("Please input a correct choice.  !!-_-!!\n\n");
 		}
 	} while (choice != 0);
 	return 0;
@@ -168,7 +217,7 @@ void calculate_of_subject(int n, int m, RECORD data[], long total[], float avera
 /*输出各科的总成绩以及平均分*/
 void print_total_and_average_of_each_subject(int m, char subject[][20], long total[], float average[]) {
 	for (int i = 0; i < m; i++) {
-	printf("%s: total = %d\taverage = %.2f\n", subject[i], total[i], average[i]);	
+	printf("%s: total = %-4d\taverage = %.2f\n", subject[i], total[i], average[i]);	
 	}
 	printf("\n");
 }
@@ -238,6 +287,7 @@ void print_score(RECORD data[], char subject[][20], int n, int m) {
 		printf("%d\t", data[i].total2);
 		printf("\n");
 	}
+	printf("\n");
 }
 
 /*按学号升序排列*/
@@ -296,7 +346,7 @@ int search_student_rank_and_grade_by_student_id(RECORD data[], char subject[][20
 			return 0;
 		}
 	}
-	printf("Not existence\n");
+	printf("Not existence\n\n");
 	return 0;
 }
 
@@ -318,7 +368,7 @@ int search_student_rank_and_grade_by_student_name(RECORD data[], char subject[][
 			return 0;
 		}
 	}
-	printf("Not existence\n");
+	printf("Not existence\n\n");
 	return 0;
 }
 
