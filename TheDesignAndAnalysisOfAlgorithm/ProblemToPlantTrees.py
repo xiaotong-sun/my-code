@@ -27,7 +27,7 @@ def output2(list0, list1):
     for i in list0:
         temp += i
     for j in range(temp):
-        print(list1[j][0] + "\t" + str(list1[j][1]) + "\t" + list1[j][2] + "\t" + str(list1[j][3]))
+        print("{} \t {} \t {} \t {}" .format(list1[j][0], list1[j][1], list1[j][2], list1[j][3]))
 
 
 def MergeSort(lists):
@@ -54,6 +54,23 @@ def Merge(left, right):
     return result
 
 
+def BinarySearch(list1, key, count):
+    length = len(list1)
+    low = 0
+    heigh = length - 1
+    while low <= heigh:
+        count = count + 1
+        mid = (low + heigh) // 2
+        if list1[mid][3] == key:
+            print("该生排名在第{}位，查找{}次成功,{} {} {} {}" .format(mid + 1, count, list1[mid][0], list1[mid][1], list1[mid][2], list1[mid][3]))
+            return 0
+        elif list1[mid][3] > key:
+            heigh = mid - 1
+        else:
+            low = mid + 1
+
+
+
 def main():
     list0 = []  # 记录每个专业的学生人数
     list1 = []  # 存放汇总出来的总表
@@ -64,8 +81,11 @@ def main():
     output1(majorNum, list0, list1, majorList)
     result = MergeSort(list1)
     print("排序后的输出：")
-    print("专业\t\t学号\t姓名\t植树数量")
+    print("专业\t\t\t学号\t姓名\t植树数量")
     output2(list0, result)
+    key = int(input("要查找的植树数目:"))
+    count = 0
+    BinarySearch(result, key, count)
 
 
 main()
