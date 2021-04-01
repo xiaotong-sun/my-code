@@ -1,4 +1,3 @@
-package exercise4;
 import java.util.*;
 
 class Solution {
