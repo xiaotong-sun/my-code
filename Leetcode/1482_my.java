@@ -24,9 +24,6 @@ class Solution {
                 low = mid + 1;
             }
         }
-        if (!check(bloomDay, m, k, low)) {
-            return -1;
-        }
         return low;
     }
 	
