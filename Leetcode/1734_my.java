@@ -4,6 +4,8 @@
     So, we can enumerate every num between 1 and n as the first number of the perm_Array, and check whether the first number is correct.
     The definition of Correct is that, if we know the first number of perm-Array, then we can compute all the numbers in the perm-Array, if all
     of the numbers are between 1 and n, we claim that the first number is Correct.
+    
+    HOWEVER this method will be Time-Out!!!
 */
 
 import java.util.ArrayList;
